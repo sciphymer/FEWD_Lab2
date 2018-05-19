@@ -3,16 +3,15 @@ let color = document.querySelector('input[type="color"]');
 // Select size input
 const button = document.querySelector('input[type="submit"]');
 // When size is submitted by the user, call makeGrid()
-let table = document.querySelector('#pixelCanvas');
-
-let selectedTD;
+const table = document.querySelector('#pixelCanvas');
 
 function paintColor(td){
-	if(selectedTD){
-		selectedTD.style.color=color.value;
-	} else {
-		selectedTD.style.color="#FFFFFF";
+	//when inital is undefinite or the pixel white in color
+	if(td.style.backgroundColor=="" || td.style.backgroundColor=="rgb(255, 255, 255)"){
+		td.style.backgroundColor=color.value;
 	}
+	//when the pixel is colored
+	else td.style.removeProperty('background-color');
 }
 
 function makeGrid() {
@@ -37,7 +36,7 @@ function makeGrid() {
   	//add click listener to the table and monitor this childrens events
   	table.addEventListener('click', function (evt){
 		let target = evt.target;
-		if(target.tagName != 'td') return;
+		if((target.tagName) != 'TD') return;
 		paintColor(target);
 	});
 }
